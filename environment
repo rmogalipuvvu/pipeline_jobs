@@ -1,0 +1,31 @@
+pipeline {
+    agent {label 'demo'}
+    environment {
+        RAJANI ='global'
+    }    
+    
+    stages { 
+        stage('stage1') {
+        environment {
+            MYNAME ='RAJANI'
+        }
+            steps {
+                sh "echo 'your name is :$RAJANI'"
+                
+
+            }
+        }   
+              stage('stage2') {
+                  steps{
+                  echo env.RAJANI
+              
+                }      
+                
+                
+            }
+            
+            
+            
+            
+       }    
+    }   
