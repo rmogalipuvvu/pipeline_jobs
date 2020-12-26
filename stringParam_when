@@ -1,0 +1,21 @@
+pipeline {
+    agent any
+    parameters { 
+    string(name:'PERSON',defaultValue:'RAJANI',description:'who are you?')
+    }
+    stages {
+    stage ('Stage1') {
+        when {
+            equals expected:'RAJANI' ,actual: params.PERSON 
+            }
+       steps {
+        echo 'Hi Rajani !!'   
+       }
+    }    
+     
+     
+     }
+       
+    }
+    
+    
