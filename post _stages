@@ -1,0 +1,17 @@
+pipeline {
+    agent any
+    stages { 
+    stage('Stage1') {
+        steps { 
+            echo 'Stage1' }
+        post {
+            always {
+            echo 'Hello again!'   
+            }
+       }
+    }
+   stage('Stage2') {
+    steps { echo 'Stage2' }    
+            }
+        }
+    }       
