@@ -1,0 +1,14 @@
+pipeline {
+    agent { label 'demo' }
+     stages {
+         stage('clone Repo') {
+             
+          steps {
+            echo 'going to checkout from git'
+          git branch: 'master',url: 'https://github.com/rmogalipuvvu/jenkins_maven.git'
+            echo "completed checkout from git"   
+          }   
+    
+      }
+     }   
+}      
