@@ -1,0 +1,16 @@
+pipeline {
+    agent { label 'demo' }
+     stages {
+         stage ('clijob2') {
+               steps {
+            build job :'clijob2',wait: false
+               }        
+         }       
+        stage  ('stage2')  {
+          steps {
+            echo "Testing"  
+          }
+    
+      }
+     }   
+}      
