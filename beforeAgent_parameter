@@ -1,0 +1,23 @@
+ipeline {
+    agent any
+    parameters { 
+    string(name:'PERSON',defaultValue:'RAJANI',description:'who are you?')
+      }
+    stages {
+    stage ('Stage1') {
+        agent { label 'demo' }
+        when {
+            beforeAgent  true
+            equals expected:'RAJANI' ,actual: params.PERSON 
+            }
+        
+       steps {
+        echo 'Hi Rajani !!'   
+       }
+    }    
+     
+     
+     }
+       
+}    
+    
