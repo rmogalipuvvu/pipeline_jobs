@@ -1,0 +1,24 @@
+ipeline {
+    agent any
+    parameters { 
+    string(name:'PERSON',defaultValue:'RAJANI',description:'who are you?')
+    booleanParam(name: 'TOGGLE',defaultValue: true,description: 'Toggle this value')
+    }
+    stages {
+    stage ('Stage1') {
+        when {
+            anyOf {
+            equals expected:'RAJANI' ,actual: params.PERSON 
+            expression { return params.TOGGLE }
+            }
+    }    
+       steps {
+        echo 'Hi Rajani !!'   
+       }
+    }    
+     
+     
+     }
+       
+}    
+    
