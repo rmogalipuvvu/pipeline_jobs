@@ -1,0 +1,40 @@
+peline {
+    agent none
+    stages {
+        stage ('Checkout') {
+            agent { label 'demo'}
+            steps {
+                git branch: 'master', url:'https://github.com/rmogalipuvvu/pipelinejenkins_repo.git'
+            }
+        }
+       stage('PreCheck') {
+           agent { label 'demo' }
+           when {
+               anyOf {
+                changeset "samplejar/**"
+                changeset "samplewar/**"
+               }
+           }          
+            steps {
+                script {
+                    env.BUILDME ='yes' // Set env variable to set further Build Stages
+                }
+            }
+       }
+       
+           stage ( 'Build Artifacts') {
+           agent { label 'demo' }
+           when { environment name: 'BUILDME', value: 'yes'}
+           steps {
+               echo 'Building Jar Component'
+               dir ( "./samplejar" ) {
+               sh "mvn clean package"
+               }
+               echo 'Building War component'
+               dir ( "./samplewar" ) {
+                  sh "mvn clean package" 
+               }
+           }
+       }
+    }
+}       
