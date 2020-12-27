@@ -1,0 +1,23 @@
+ipeline {
+    agent {label 'demo'}
+    stages { 
+        stage ('stage1') {
+            steps {
+                echo "first stage"
+            }
+        }   
+              stage ('stage2') {
+              steps{
+                  echo "second stage"
+              
+          }      
+                
+                
+                
+            }
+            
+            
+            
+            
+            
+    }    }
