@@ -14,3 +14,16 @@ Provide credentials
 
 username: admin
 password: password
+
+Then click on admin  and go to quick setup ,select maven and continue ,five repositories are created
+create  new user by clicking on admin and give admin priveleges
+For integrtating maven and artifactory go to artifactory and click on libs-snapshot-local on the righthand corner there is set me up copy the snippet under dependencies and later
+Under root there is .m2 directory create newfile settings.xml and go to artifactory and generate maven settings and copy the snippet into settings.xml
+Username and password need to be changed in two places under servers
+Go to maven server and to your project do  mvn deploy
+It integrates and stores war/jar in lib-snapshot-local
+To create version go to pom.xml and remove snapshot
+Next in artifactory click on lib-release-local and set me up and copy the snippet in pom.xml under snapshot repository
+Go to maven server and to your project do mvn deploy
+It integrates and stores version in lib-release-local
+
