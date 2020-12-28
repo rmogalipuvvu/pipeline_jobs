@@ -5,7 +5,8 @@ java -version
 set up environment variable for java
 find /usr/lib/jvm/java-1.8* | head -n3
 under root nano/vi .bash_profile
-config JAVA_HOME=
+config JAVA_HOME=JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.265.b01-1.amzn2.0.1.x86_64
+PATh
 cd /opt 
 wget https://jfrog.bintray.com/artifactory/jfrog-artifactory-oss-6.9.6.zip
 extract artifactory tar.gz file
