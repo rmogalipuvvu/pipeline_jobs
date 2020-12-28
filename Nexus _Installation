@@ -1,0 +1,60 @@
+T2 4gb instance is needed(used Amazon linux)
+Java  is the prerequisite.Install java-1.8*
+Yum install Java-1.8* -y
+java -version
+set up environment variable for java
+find /usr/lib/jvm/java-1.8* | head -n3 (take 3rdline in output and copy paste near JAVA_HOME)
+vi  .bash_profile
+Java_HOME=JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.265.b01-1.amzn2.0.1.x86_64
+PATH=$PATH:$HOME/bin:$JAVA_HOME
+wget https://download.sonatype.com/nexus/3/latest-unix.tar.gz
+tar xvzf latest-unix.tar.gz (for extraction)
+mv nexus-3.29.1-0.1 nexus ( changing name to nexus)
+ create user (nexus)
+ visudo {to give sudo priveleges to user)
+ nexus ALL=(ALL) NO PASSWD ALL
+ To change ownership and permissions
+ chown -R nexus:nexus /opt/nexus
+ chown -R nexus:nexus /opt/sonatype-work
+ chmod -R 775 /opt/nexus
+ chown -R 775 /opt/sonatype-work
+ Next  nano nexus/bin/nexus-rc.In that uncomment the line and add user in quotes (nexus)
+ create a soft link for service  ln -s /opt/nexus/bin/nexus /opt/init-d/nexus
+ switch to user nexus  su -- nexus
+ Enable the nexus service -sudo systemctl enable nexus
+ check the status -sudo systemctl status nexus
+ start the nexus -sudo  systemctl start nexus
+ check the port 8081 is listening with netstat -tulpn
+ Go to Browser :public ip/public IP4 DNS:8081
+ log in with user admin and password is cat/opt/sonatype-work/nexus3/admin-password
+ copy paste in browser and login (can change password)
+  create two repos maven2 host  1.repo_name release  2. repo_name snapshot
+  Integrate maven with Nexus repository
+  Vi/nano pom.xml
+  <distributionManagement>
+        <snapshotRepository>
+
+        <id>nexus</id>
+        <name>Snapshot Nexus Repository</name>
+        <url>http://3.236.225.54:8081/repository/paytm-snapshot/</url>
+    </snapshotRepository>
+    <repository>
+
+        <id>nexus</id>
+        <name>Releases Nexus Repository</name>
+        <url>http://3.236.225.54:8081/repository/paytm-release/</url>
+    </repository>
+
+</distributionManagement>
+
+Next need to create credetentials in Maven home
+vi/nano /opt/maven/conf/settings.xml (copy paste above tag </servers>)
+server>
+      <id>nexus</id>
+      <username>admin</username>
+      <password>password</password>
+    </server>
+
+ Go to maven instance and near your project   -- mvn clean deploy ( build success) it deploy snapshot on nexus repository
+To deploy version on to nexus (nano/vi pom.xml) in line   <version>2.0-SNAPSHOT </version> ( remove SNAPSHOT)
+mvn clean deploy it deploys release on to nexus repository
