@@ -7,6 +7,8 @@ find /usr/lib/jvm/java-1.8* | head -n3 (take 3rdline in output and copy paste ne
 vi  .bash_profile
 Java_HOME=JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.265.b01-1.amzn2.0.1.x86_64
 PATH=$PATH:$HOME/bin:$JAVA_HOME
+Source .bash_profile
+Echo $PATH ( gives updated path of java)
 wget https://download.sonatype.com/nexus/3/latest-unix.tar.gz
 tar xvzf latest-unix.tar.gz (for extraction)
 mv nexus-3.29.1-0.1 nexus ( changing name to nexus)
