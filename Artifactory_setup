@@ -1,4 +1,4 @@
-to install jfrog artifactory we need 4Gb T2 medium instance
+To install jfrog artifactory we need 4Gb T2 medium instance
 Java is prerequisite
 yum install java-1.8* -y
 java -version
