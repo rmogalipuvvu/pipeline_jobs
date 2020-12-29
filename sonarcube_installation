@@ -1,0 +1,30 @@
+T2 micro 4gb is requirement for installing SonarQube
+yum install java-1.8* -y
+set environment variable for java
+Nano/vi .bash_profile under root
+JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.265.b01-1.amzn2.0.1.x86_64
+PATH=$PATH:$HOME/bin:$JAVA_HOME
+source .bash_profile
+echo $PATH
+wget https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-7.8.zip  in cd /opt ( above version sonarqube 8 needs Java -11)
+unzip sonarqube-7.8.zip
+create user sonar
+To Change ownership permission-chown -R sonar:sonar /opt/ sonarqube-7.8
+To change file permisions -chmod 775 /opt/ sonarqube-7.8
+change to user sonar su - sonar
+start the sonar services by going  /opt/sonarqube-7./linux-x86-64/
+To start give ./sonar.sh start (shows starting sonar)
+Go to browser hhtp://ipadress:9000
+Go to Maven instance in your project  nano/vi pom.xml add under properties
+<properties>
+
+   <jdk.version>1.8</jdk.version>
+    <sonar.host.url>http://3.231.228.228:9000/</sonar.host.url>
+    <sonar.login>admin</sonar.login>
+    <sonar.password>1234</sonar.password>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.source>1.7</maven.compiler.source>
+    <maven.compiler.target>1.7</maven.compiler.target>
+  </properties>
+  In your project mvn sonar:sonar is given
+  project is deployed on sonarqube.
